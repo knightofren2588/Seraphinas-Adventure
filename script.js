@@ -56,7 +56,7 @@ class SeraphinaTracker {
                 "How far I've come from those first tentative steps.",
                 "Each memory shapes the priest I am becoming."
             ]
-        }
+        };
         
         // 🎨 Zone-based themes
         this.zoneThemes = {
@@ -210,27 +210,15 @@ class SeraphinaTracker {
         }
     }
     
-    // 🌍 Dynamic Background System
+    // 🌍 Shadow Priest Theme (No Zone Changes)
     updateDynamicBackground() {
-        if (this.entries.length === 0) return;
+        // Remove any old zone classes
+        document.body.classList.remove('eversong-woods', 'silvermoon-city', 'ghostlands', 'undercity');
         
-        // Get the most recent zone
-        const recentEntry = this.entries[this.entries.length - 1];
-        const zone = recentEntry.zone ? recentEntry.zone.toLowerCase() : '';
+        // Always maintain shadow priest theme
+        document.body.classList.add('shadow-priest-theme');
         
-        // Remove all zone classes
-        Object.values(this.zoneThemes).forEach(themeClass => {
-            document.body.classList.remove(themeClass);
-        });
-        
-        // Apply new zone theme
-        for (const [zoneName, themeClass] of Object.entries(this.zoneThemes)) {
-            if (zone.includes(zoneName)) {
-                document.body.classList.add(themeClass);
-                console.log(`🌍 Zone theme applied: ${themeClass}`);
-                break;
-            }
-        }
+        console.log('🌙 Shadow Priest theme maintained');
     }
     
     // 🖼️ Interactive Portrait Setup
