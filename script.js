@@ -56,7 +56,7 @@ class SeraphinaTracker {
                 "How far I've come from those first tentative steps.",
                 "Each memory shapes the priest I am becoming."
             ]
-        };
+        }
         
         // 🎨 Zone-based themes
         this.zoneThemes = {
@@ -474,17 +474,48 @@ class SeraphinaTracker {
             <div class="mood-indicator mood-${mood}">
                 ${this.getMoodEmoji(mood)}
             </div>
+            
             <div class="progress-header">
                 <h3>Level ${entry.level} - ${entry.title}</h3>
-                <span class="progress-date">${new Date(entry.date).toLocaleDateString()}</span>
+                <div class="progress-date">${new Date(entry.date).toLocaleDateString()}</div>
             </div>
-            <div class="progress-zone"><strong>Zone:</strong> ${entry.zone}</div>
-            <div class="progress-type"><strong>Type:</strong> ${entry.type}</div>
-            ${entry.screenshot ? `<img src="${entry.screenshot}" alt="Progress Screenshot" class="progress-screenshot">` : ''}
-            <div class="progress-description">${entry.description}</div>
-            ${entry.notes ? `<div class="progress-notes"><strong>Notes:</strong> ${entry.notes}</div>` : ''}
-            ${entry.gear ? `<div class="progress-gear"><strong>Gear:</strong> ${entry.gear}</div>` : ''}
-            ${entry.professions ? `<div class="progress-professions"><strong>Professions:</strong> ${entry.professions}</div>` : ''}
+            
+            <div class="progress-meta">
+                <div class="progress-zone">
+                    <strong>Zone</strong>
+                    ${entry.zone}
+                </div>
+                <div class="progress-type">
+                    <strong>Type</strong>
+                    ${entry.type}
+                </div>
+            </div>
+            
+            ${entry.screenshot ? `<img src="${entry.screenshot}" alt="Progress Screenshot" class="progress-screenshot" onclick="tracker.viewFullScreenshot('${entry.screenshot}')">` : ''}
+            
+            <div class="progress-description">
+                ${this.formatText(entry.description)}
+            </div>
+            
+            ${entry.notes ? `
+                <div class="progress-notes">
+                    <strong>Personal Notes:</strong>
+                    ${this.formatText(entry.notes)}
+                </div>
+            ` : ''}
+            
+            ${entry.gear ? `
+                <div class="progress-gear">
+                    <strong>Gear:</strong> ${entry.gear}
+                </div>
+            ` : ''}
+            
+            ${entry.professions ? `
+                <div class="progress-professions">
+                    <strong>Professions:</strong> ${entry.professions}
+                </div>
+            ` : ''}
+            
             <div class="progress-actions">
                 <button class="btn btn-edit" onclick="tracker.editEntry(${this.entries.indexOf(entry)})">Edit</button>
                 <button class="btn btn-secondary btn-delete" onclick="tracker.deleteEntry(${this.entries.indexOf(entry)})">Delete</button>
@@ -492,6 +523,52 @@ class SeraphinaTracker {
         `;
         
         return card;
+    }
+    
+    // 📝 Format text with better line breaks and spacing
+    formatText(text) {
+        if (!text) return '';
+        
+        return text
+            .replace(/\. /g, '.<br><br>') // Add breaks after sentences
+            .replace(/\! /g, '!<br><br>') // Add breaks after exclamations
+            .replace(/\? /g, '?<br><br>') // Add breaks after questions
+            .replace(/<br><br><br>/g, '<br><br>'); // Prevent triple breaks
+    }
+    
+    // 🖼️ View full screenshot function
+    viewFullScreenshot(imageSrc) {
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            cursor: pointer;
+        `;
+        
+        const img = document.createElement('img');
+        img.src = imageSrc;
+        img.style.cssText = `
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+        `;
+        
+        modal.appendChild(img);
+        document.body.appendChild(modal);
+        
+        modal.addEventListener('click', () => {
+            document.body.removeChild(modal);
+        });
     }
     
     getMoodForEntry(entry) {

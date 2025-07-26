@@ -410,18 +410,26 @@ body.undercity {
 /* 🖼️ SCREENSHOT ZOOM ON HOVER */
 .progress-screenshot {
     width: 100%;
-    max-height: 200px;
+    max-height: 150px; /* Reduced from 200px */
     object-fit: cover;
     border-radius: 10px;
     margin: 15px 0;
     transition: all 0.4s ease;
     cursor: zoom-in;
+    border: 2px solid rgba(138, 43, 226, 0.3);
 }
 
 .progress-screenshot:hover {
-    transform: scale(1.05);
+    transform: scale(1.02); /* Reduced from 1.05 */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
+    border-color: rgba(138, 43, 226, 0.8);
+    max-height: 200px; /* Grows slightly on hover */
+}
+
+/* Click to view full size */
+.progress-screenshot:active {
+    transform: scale(0.98);
 }
 
 /* 🔮 PULSING BORDERS FOR SPECIAL CARDS */
@@ -455,6 +463,98 @@ body.undercity {
     50% { box-shadow: 0 0 20px rgba(50, 205, 50, 0.6); }
 }
 
+/* 📝 Progress Card Content Formatting */
+.progress-header {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(138, 43, 226, 0.2);
+}
+
+.progress-header h3 {
+    color: #d4af37;
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+
+.progress-date {
+    color: #aaa;
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.progress-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border-left: 4px solid rgba(138, 43, 226, 0.5);
+}
+
+.progress-zone, .progress-type {
+    font-size: 0.9em;
+    color: #e8e8e8;
+}
+
+.progress-zone strong, .progress-type strong {
+    color: #8a2be2;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.progress-description {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    line-height: 1.6;
+    font-size: 0.95em;
+    border-left: 3px solid rgba(212, 175, 55, 0.6);
+}
+
+.progress-notes {
+    margin: 15px 0;
+    padding: 12px;
+    background: rgba(75, 0, 130, 0.1);
+    border-radius: 8px;
+    border-left: 3px solid rgba(138, 43, 226, 0.6);
+    font-style: italic;
+    line-height: 1.5;
+    font-size: 0.9em;
+}
+
+.progress-notes strong {
+    color: #8a2be2;
+    font-style: normal;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.progress-gear, .progress-professions {
+    margin: 10px 0;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    font-size: 0.85em;
+    color: #ccc;
+}
+
+.progress-gear strong, .progress-professions strong {
+    color: #d4af37;
+    margin-right: 5px;
+}
+
+.progress-actions {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid rgba(138, 43, 226, 0.2);
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
 /* 🌟 MOOD INDICATOR */
 .mood-indicator {
     position: absolute;
@@ -468,6 +568,16 @@ body.undercity {
     justify-content: center;
     font-size: 18px;
     animation: moodPulse 2s ease-in-out infinite;
+}
+
+.mood-excited { background: linear-gradient(45deg, #ff6b6b, #ee5a24); }
+.mood-accomplished { background: linear-gradient(45deg, #26de81, #20bf6b); }
+.mood-mysterious { background: linear-gradient(45deg, #8854d0, #4b7bec); }
+.mood-nostalgic { background: linear-gradient(45deg, #fed330, #f7b731); }
+
+@keyframes moodPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
 .mood-excited { background: linear-gradient(45deg, #ff6b6b, #ee5a24); }
