@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seraphina Dawnwhisper - Shadow Priest Chronicle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 🌟 Magical Particle Background -->
+    <div class="particle-container"></div>
+    
+    <div class="container">
+        <!-- 🎭 Enhanced Character Header -->
+        <div class="character-header">
+            <div class="character-portrait" id="character-portrait" title="Click to upload your character portrait!">
+                🌙
+            </div>
+            <h1>Seraphina Dawnwhisper</h1>
+            <h2>Shadow Priest of the Void</h2>
+            <div class="character-quote">
+                "The shadows whisper secrets that even the Light cannot illuminate..."
+            </div>
+            
+            <div class="character-bio">
+                <p><strong>Race:</strong> Blood Elf | <strong>Class:</strong> Priest | <strong>Spec:</strong> Shadow</p>
+                <p><strong>Guild:</strong> Seekers of the Veil | <strong>Realm:</strong> Silvermoon</p>
+                <p>A former novice of the Light who discovered her true calling in the whispers of the Void. 
+                Seraphina walks the delicate balance between shadow and radiance, seeking knowledge that others fear to pursue.</p>
+                <p><em>💡 Tip: Click the portrait above to upload your character's image! (Max 5MB - auto-resized to 300x300)</em></p>
+            </div>
+        </div>
+
+        <!-- 🏆 Achievement System -->
+        <div class="achievements-section">
+            <h2>🏆 Achievements Unlocked</h2>
+            <div class="achievements-container">
+                <!-- Achievement badges will be dynamically generated -->
+            </div>
+        </div>
+
+        <!-- 📊 Enhanced Stats Dashboard -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3>Current Level</h3>
+                <div class="stat-value" id="current-level">1</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total Entries</h3>
+                <div class="stat-value" id="total-entries">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Zones Explored</h3>
+                <div class="stat-value" id="zones-explored">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Achievements</h3>
+                <div class="stat-value" id="achievements-unlocked">0</div>
+            </div>
+        </div>
+
+        <!-- 📝 Enhanced Progress Section -->
+        <div class="progress-section">
+            <div class="section-header">
+                <h2>📖 Chronicle of Adventures</h2>
+                <button class="add-entry-btn">➕ Add Progress Entry</button>
+            </div>
+            
+            <div class="progress-container" id="progress-container">
+                <!-- Progress cards will be dynamically generated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 🎮 Enhanced Modal for Adding/Editing Entries -->
+    <div id="entryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle">Add Progress Entry</h2>
+            </div>
+            
+            <form id="entryForm">
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="level">Level:</label>
+                    <input type="number" id="level" name="level" min="1" max="80" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="zone">Zone:</label>
+                    <input type="text" id="zone" name="zone" placeholder="e.g., Eversong Woods" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="type">Milestone Type:</label>
+                    <select id="type" name="type" required>
+                        <option value="story">Story</option>
+                        <option value="milestone">Milestone</option>
+                        <option value="achievement">Achievement</option>
+                        <option value="death">Death</option>
+                        <option value="dungeon">Dungeon</option>
+                        <option value="quest">Quest</option>
+                        <option value="gear">Gear Upgrade</option>
+                        <option value="skill">Skill/Talent</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" placeholder="Brief title for this entry" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="4" 
+                              placeholder="Describe what happened during this milestone..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Personal Notes (Optional):</label>
+                    <textarea id="notes" name="notes" rows="3" 
+                              placeholder="Your thoughts, feelings, or additional details..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gear">Current Gear (Optional):</label>
+                    <input type="text" id="gear" name="gear" 
+                           placeholder="Notable equipment or weapons">
+                </div>
+                
+                <div class="form-group">
+                    <label for="professions">Professions (Optional):</label>
+                    <input type="text" id="professions" name="professions" 
+                           placeholder="e.g., Tailoring: 150, Enchanting: 75">
+                </div>
+                
+                <div class="form-group">
+                    <label for="screenshot">📸 Screenshot (Optional):</label>
+                    <input type="file" id="screenshot" name="screenshot" accept="image/*" 
+                           style="padding: 15px; border: 2px dashed rgba(138, 43, 226, 0.5); border-radius: 10px; background: rgba(138, 43, 226, 0.1);">
+                    <small style="color: #d4af37; display: block; margin-top: 5px;">
+                        💡 Upload a screenshot of this moment! (Max 8MB - auto-compressed for optimal storage)
+                    </small>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn">Save Entry</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('entryModal').style.display='none'">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <!-- Set today's date as default -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
+        });
+    </script>
+</body>
+</html>
